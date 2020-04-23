@@ -31,7 +31,26 @@ function exec(params, commander) {
     cmds = shortcut.split(' ').concat(cmds);
   }
 
-  spawn.sync(cmds[0], cmds.slice(1), { stdio: 'inherit' });
+  const multiCmds = [[]];
+
+  cmds.forEach((cmd, i) => {
+    if (cmd === '&&' || cmd === '&') {
+      multiCmds.push([]);
+    } else if (cmd === '+') {
+      // 跳过
+    } else if (cmds[i - 1] === '+') {
+      // 无空格累加
+      const item = multiCmds[multiCmds.length - 1];
+      item[item.length - 1] = item[item.length - 1] + cmd;
+    } else {
+      multiCmds[multiCmds.length - 1].push(cmd);
+    }
+  });
+
+  for (let index = 0; index < multiCmds.length; index += 1) {
+    const element = multiCmds[index];
+    spawn.sync(element[0], element.slice(1), { stdio: 'inherit' });
+  }
 }
 
 module.exports = exec;
