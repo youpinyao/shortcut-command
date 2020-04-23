@@ -10,7 +10,7 @@ module.exports = () => {
 
   try {
     commonConfig = fs.readFileSync(path.resolve(os.homedir(), configName));
-    commonConfig = JSON.parse(config.toString());
+    commonConfig = JSON.parse(commonConfig.toString());
   } catch (error) {
     commonConfig = null;
   }
