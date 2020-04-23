@@ -1,8 +1,0 @@
-{
-  "gpu": "git push",
-  "gpl": "git pull",
-  "gcp": "git cherry-pick",
-  "build": "npm run build",
-  "start": "npm run start",
-  "ul": "git pull && git push"
-}
