@@ -9,11 +9,14 @@ commander
   .option('-i, --init', 'init a config file', () => {
     init();
   })
+  .option('<key> ...<args>', 'exec command', () => {
+
+  })
   .action((_, args) => {
     if (commander.init) {
       return;
     }
-    exec(args);
+    exec(args, commander);
   })
   .parse(process.argv);
 

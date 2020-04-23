@@ -6,17 +6,18 @@ const fs = require('fs');
 
 const configName = '.scconfig.json';
 
-function exec(params) {
+function exec(params, commander) {
+  if (!params) {
+    commander.outputHelp();
+    return;
+  }
+
   let config;
 
   try {
     config = fs.readFileSync(path.resolve(process.cwd(), configName));
   } catch (error) {
     config = fs.readFileSync(path.resolve(os.homedir(), configName));
-  }
-
-  if (!config) {
-    throw Error('please init');
   }
 
   config = JSON.parse(config.toString());
