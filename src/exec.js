@@ -19,13 +19,13 @@ function exec(params, commander) {
     cmds = shortcut.split(' ').concat(cmds);
   }
 
-  const multiCmds = [[]];
+  let multiCmds = [[]];
 
   cmds.forEach((cmd, i) => {
     if (cmd === '&&' || cmd === '&') {
       multiCmds.push([]);
     } else if (cmd === '+') {
-      // 跳过
+      // 跳过 累加标识
     } else if (cmds[i - 1] === '+') {
       // 无空格累加
       const item = multiCmds[multiCmds.length - 1];
@@ -34,6 +34,18 @@ function exec(params, commander) {
       multiCmds[multiCmds.length - 1].push(cmd);
     }
   });
+
+  // 字符串标识
+  multiCmds = multiCmds.map((items) => items.map((cmd, i) => {
+    if (items[i - 1] === '--string') {
+      return `"${cmd.replace(/'/g, '\\\'')}"`;
+    }
+
+    return cmd;
+  }));
+
+  // 过滤无用
+  multiCmds = multiCmds.map((items) => items.filter((cmd) => cmd !== '--string'));
 
   for (let index = 0; index < multiCmds.length; index += 1) {
     const element = multiCmds[index];

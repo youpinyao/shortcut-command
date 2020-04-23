@@ -35,3 +35,12 @@ sc --init
 sc gpl (git pull)
 sc gcp 5405d3bcec7651894a378ac661fb274529168cea (git cherry-pick 5405d3bcec7651894a378ac661fb274529168cea)
 ```
+
+
+## 特殊处理
+
+```node
+--string 字符串
++ 前后连接无空格
+
+```
