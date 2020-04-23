@@ -1,10 +1,7 @@
 
 const spawn = require('cross-spawn');
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
 
-const configName = '.scconfig.json';
+const getConfig = require('./config');
 
 function exec(params, commander) {
   if (!params) {
@@ -12,18 +9,9 @@ function exec(params, commander) {
     return;
   }
 
-  let config;
-
-  try {
-    config = fs.readFileSync(path.resolve(process.cwd(), configName));
-  } catch (error) {
-    config = fs.readFileSync(path.resolve(os.homedir(), configName));
-  }
-
-  config = JSON.parse(config.toString());
-
   const key = params[0];
   let cmds = [].concat(params);
+  const config = getConfig();
   const shortcut = config[key];
 
   if (shortcut) {
