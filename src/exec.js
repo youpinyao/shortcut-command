@@ -37,6 +37,14 @@ function exec(params, commander) {
 
   for (let index = 0; index < multiCmds.length; index += 1) {
     const element = multiCmds[index];
+
+    console.log();
+
+    console.log(element.join(' '));
+
+    console.log();
+
+
     spawn.sync(element[0], element.slice(1), { stdio: 'inherit' });
   }
 }
