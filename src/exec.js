@@ -50,7 +50,7 @@ function exec(params, commander) {
     // 替换参数
     if (/^{{/g.test(cmd) && /}}$/g.test(cmd)) {
       const paramsKey = cmd.replace(/^{{|}}$/g, '');
-      return params[paramsKey] || cmd;
+      return replaceParams[paramsKey] || cmd;
     }
 
     return cmd;
