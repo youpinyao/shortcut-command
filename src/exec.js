@@ -20,12 +20,16 @@ function exec(params, commander) {
   }
 
   let multiCmds = [[]];
+  const params = {};
 
   cmds.forEach((cmd, i) => {
     if (cmd === '&&' || cmd === '&') {
       multiCmds.push([]);
-    } else if (cmd === '+') {
-      // 跳过 累加标识
+    } else if (cmd === '+' || !cmd) {
+      // 跳过 累加标识，无用标识
+    } else if(/=/g.test(cmd) && !/^=/g.test(cmd) && !/=$/g.test(cmd)) {
+      // 跳过参数
+      params[cmd.split('=')[0]] = cmd.split('=')[1];
     } else if (cmds[i - 1] === '+') {
       // 无空格累加
       const item = multiCmds[multiCmds.length - 1];
@@ -39,6 +43,11 @@ function exec(params, commander) {
   multiCmds = multiCmds.map((items) => items.map((cmd, i) => {
     if (items[i - 1] === '--string') {
       return `"${cmd}"`;
+    }
+    // 替换参数
+    if (/^{{/g.test(cmd) && /}}$/g.test(cmd)) {
+      const key = cmd.replace(/^{{|}}$/g, '');
+      return params[key] || cmd;
     }
 
     return cmd;
