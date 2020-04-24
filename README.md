@@ -21,9 +21,9 @@ sc --init
 
 ```node
 {
-  "gpu": "git push",
-  "gpl": "git pull",
-  "gcp": "git cherry-pick",
+  "push": "git push",
+  "pull": "git pull",
+  "pick": "git cherry-pick",
   "build": "npm run build",
   "start": "npm run start"
 }
@@ -32,8 +32,9 @@ sc --init
 ## 执行
 
 ```node
-sc gpl (git pull)
-sc gcp 5405d3bcec7651894a378ac661fb274529168cea (git cherry-pick 5405d3bcec7651894a378ac661fb274529168cea)
+sc push (git push)
+sc pull (git pull)
+sc pick 5405d3bcec7651894a378ac661fb274529168cea (git cherry-pick 5405d3bcec7651894a378ac661fb274529168cea)
 ```
 
 
@@ -41,6 +42,5 @@ sc gcp 5405d3bcec7651894a378ac661fb274529168cea (git cherry-pick 5405d3bcec76518
 
 ```node
 --string 字符串
-+ 前后连接无空格
-
++        前后连接无空格
 ```
