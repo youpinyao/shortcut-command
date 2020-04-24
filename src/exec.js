@@ -77,7 +77,6 @@ function exec(params, commander) {
       console.log(chalk.green(element.join(' ')));
       console.log();
 
-
       spawn.sync(element[0], element.slice(1), { stdio: 'inherit' });
     }
   };
@@ -85,12 +84,16 @@ function exec(params, commander) {
   if (needConfirm) {
     const prompt = new Confirm({
       name: 'question',
-      message: 'are you sure?',
+      message: `
+
+${chalk.green(multiCmds.map((item) => item.join(' ')).join('\n\r'))}
+
+are you sure ?`,
     });
 
     prompt.run()
       .then((answer) => {
-        if (/^y$|^yes$/g.test(`${answer}`.toLowerCase())) {
+        if (answer) {
           doCmd();
         }
       });

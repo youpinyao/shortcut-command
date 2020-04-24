@@ -1,0 +1,7 @@
+{
+  "push": "git push",
+  "pull": "git pull",
+  "pick": "git cherry-pick",
+  "build": "npm run build",
+  "start": "npm run start"
+}
