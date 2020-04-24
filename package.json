@@ -1,6 +1,6 @@
 {
   "name": "shortcut-command",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "shortcut command",
   "main": "index.js",
   "scripts": {
