@@ -43,7 +43,6 @@ function exec(params, commander) {
     }
   });
 
-  // 字符串标识
   multiCmds = multiCmds.map((items) => items.map((cmd, i) => {
     let newCmd = cmd;
 
@@ -54,6 +53,7 @@ function exec(params, commander) {
       }
     });
 
+    // 字符串标识
     if (items[i - 1] === '--string') {
       return `"${newCmd}"`;
     }
