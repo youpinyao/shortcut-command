@@ -1,5 +1,10 @@
 # shortcut command
 
+[![](https://img.shields.io/node/v/shortcut-command.svg?style=flat-square)](https://www.npmjs.com/package/shortcut-command)
+[![](https://img.shields.io/npm/v/shortcut-command.svg?style=flat-square)](https://www.npmjs.com/package/shortcut-command)
+[![](https://img.shields.io/npm/l/shortcut-command.svg?style=flat-square)](https://www.npmjs.com/package/shortcut-command)
+[![](https://img.shields.io/npm/dt/shortcut-command.svg?style=flat-square)](https://www.npmjs.com/package/shortcut-command)
+
 ```node
 本工具用于对命令行进行缩写
 ```
