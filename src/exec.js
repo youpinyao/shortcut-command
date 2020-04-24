@@ -1,6 +1,7 @@
 
 const spawn = require('cross-spawn');
 const chalk = require('chalk');
+const { Confirm } = require('enquirer');
 
 const getConfig = require('./config');
 
@@ -22,13 +23,18 @@ function exec(params, commander) {
 
   let multiCmds = [[]];
   let replaceParams = {};
+  let needConfirm = false;
 
   cmds.forEach((cmd, i) => {
+    const isParams = /=/g.test(cmd) && !/^=/g.test(cmd) && !/=$/g.test(cmd);
     if (cmd === '&&' || cmd === '&') {
       multiCmds.push([]);
     } else if (cmd === '+' || !cmd) {
       // 跳过 累加标识，无用标识
-    } else if (/=/g.test(cmd) && !/^=/g.test(cmd) && !/=$/g.test(cmd)) {
+    } else if (cmd === '--confirm') {
+      // 是否需要确认操作
+      needConfirm = true;
+    } else if (isParams) {
       // 跳过参数
       replaceParams = {
         ...replaceParams,
@@ -63,16 +69,33 @@ function exec(params, commander) {
 
   // 过滤无用
   multiCmds = multiCmds.map((items) => items.filter((cmd) => cmd !== '--string'));
+  const doCmd = () => {
+    for (let index = 0; index < multiCmds.length; index += 1) {
+      const element = multiCmds[index];
 
-  for (let index = 0; index < multiCmds.length; index += 1) {
-    const element = multiCmds[index];
-
-    console.log();
-    console.log(chalk.green(element.join(' ')));
-    console.log();
+      console.log();
+      console.log(chalk.green(element.join(' ')));
+      console.log();
 
 
-    spawn.sync(element[0], element.slice(1), { stdio: 'inherit' });
+      spawn.sync(element[0], element.slice(1), { stdio: 'inherit' });
+    }
+  };
+
+  if (needConfirm) {
+    const prompt = new Confirm({
+      name: 'question',
+      message: 'are you sure?',
+    });
+
+    prompt.run()
+      .then((answer) => {
+        if (/^y$|^yes$/g.test(`${answer}`.toLowerCase())) {
+          doCmd();
+        }
+      });
+  } else {
+    doCmd();
   }
 }
 

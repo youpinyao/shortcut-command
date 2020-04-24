@@ -44,4 +44,5 @@ sc pick 5405d3bcec7651894a378ac661fb274529168cea (git cherry-pick 5405d3bcec7651
 --string      字符串
 +             前后连接无空格
 [key]=[value] 参数替换
+--confirm     指令是否确认
 ```
