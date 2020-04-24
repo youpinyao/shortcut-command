@@ -45,16 +45,20 @@ function exec(params, commander) {
 
   // 字符串标识
   multiCmds = multiCmds.map((items) => items.map((cmd, i) => {
-    if (items[i - 1] === '--string') {
-      return `"${cmd}"`;
-    }
+    let newCmd = cmd;
+
     // 替换参数
-    if (/^{{/g.test(cmd) && /}}$/g.test(cmd)) {
-      const paramsKey = cmd.replace(/^{{|}}$/g, '');
-      return replaceParams[paramsKey] || cmd;
+    Object.keys(replaceParams).forEach((paramsKey) => {
+      if ((new RegExp(paramsKey).test(newCmd))) {
+        newCmd = newCmd.replace(new RegExp(`{{${paramsKey}}}`, 'g'), replaceParams[paramsKey]);
+      }
+    });
+
+    if (items[i - 1] === '--string') {
+      return `"${newCmd}"`;
     }
 
-    return cmd;
+    return newCmd;
   }));
 
   // 过滤无用
