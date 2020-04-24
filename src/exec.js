@@ -1,5 +1,6 @@
 
 const spawn = require('cross-spawn');
+const chalk = require('chalk');
 
 const getConfig = require('./config');
 
@@ -63,9 +64,7 @@ function exec(params, commander) {
     const element = multiCmds[index];
 
     console.log();
-
-    console.log(element.join(' '));
-
+    console.log(chalk.green(element.join(' ')));
     console.log();
 
 

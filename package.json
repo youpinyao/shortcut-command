@@ -1,6 +1,6 @@
 {
   "name": "shortcut-command",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "shortcut command",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "eslint-plugin-import": "^2.20.2"
   },
   "dependencies": {
+    "chalk": "^4.0.0",
     "commander": "^5.0.0",
     "cross-spawn": "^7.0.2"
   }
