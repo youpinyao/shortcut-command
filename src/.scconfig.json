@@ -2,6 +2,7 @@
   "push": "git push",
   "pull": "git pull",
   "pick": "git cherry-pick",
+  "amend": "git commit --amend",
   "build": "npm run build",
   "start": "npm run start"
 }
