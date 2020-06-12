@@ -2,7 +2,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-const configName = '.scconfig.json';
+const configName = require('./configName');
 
 module.exports = () => {
   let commonConfig;

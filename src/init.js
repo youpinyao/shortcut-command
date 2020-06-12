@@ -1,11 +1,12 @@
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
-const configName = '.scconfig.json';
+const configName = require('./configName');
 
 function init() {
-  fs.copyFileSync(path.resolve(__dirname, configName), path.resolve(process.cwd(), configName));
+  fs.copyFileSync(path.resolve(__dirname, configName), path.resolve(os.homedir(), configName));
 }
 
 module.exports = init;

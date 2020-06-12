@@ -7,7 +7,7 @@ const config = require('../src/config');
 
 commander
   .version(require('../package.json').version)
-  .option('-i, --init', 'init a config file', () => {
+  .option('-i, --init', 'init a config file in homedir', () => {
     init();
   })
   .option('-c, --config', 'show config', () => {
